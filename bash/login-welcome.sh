@@ -12,22 +12,26 @@
 ###############
 # Variables   #
 ###############
-name="$USER",
-myarray=(professor boss student don finalboss)
-date=$(date +'%H:%M %p' |$myarray_index)
+name="$USER"
+date=$(date +'%H:%M %p')
 hostname=$(hostname)
 weekday=$(date +%u)
-myarray_index=$((RANDOM % ${#myarray[0]}))
 
 ###############
 # Main        #
 ###############
-cat <<EOF
-Welcome to planet $hostname, $name!
-if [ "$weekday" = "6" ] || [ "$weekday" = "7" ]
+Variable=$(cat <<EOF
+ Welcome to planet $hostname, $name!
+
+$(if [ "$weekday" = "6" ] || [ "$weekday" = "7" ]
 then
-   echo "It is $date  a Weekend."
+   echo "It is $date a Weekend."
 else
    echo "It is $date a Weekday."
-fi
+fi)
+EOF
+)
+
+cat <<EOF
+$(cowsay $Variable)
 EOF
